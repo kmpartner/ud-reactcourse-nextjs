@@ -5,7 +5,7 @@ import Head from "next/head";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 
 function MeetupDetails(props) {
-  console.log(props);
+  // console.log(props);
   return (
     <Fragment>
       <Head>
@@ -35,31 +35,44 @@ function MeetupDetails(props) {
   );
 }
 
-// export async function getStaticPaths(props) {
+export async function getStaticPaths(props) {
+  return {
+    // fallback: "blocking",
+    fallback: false,
+    paths: [
+      {
+        params: {
+          meetupId: "m1",
+        },
+      },
+      {
+        params: {
+          meetupId: "m2",
+        },
+      },
+    ],
+  };
+}
 
-//   // return {
-//   //   fallback: 'blocking',
-//   //   paths: meetups.map((meetup) => ({
-//   //     params: { meetupId: meetup._id.toString() },
-//   //   })),
-//   // };
-// }
+export async function getStaticProps(context) {
+  // fetch data for a single meetup
 
-// export async function getStaticProps(context) {
-//   // fetch data for a single meetup
+  const meetupId = context.params.meetupId;
 
+  console.log(meetupId);
 
-//   // return {
-//   //   props: {
-//   //     meetupData: {
-//   //       id: selectedMeetup._id.toString(),
-//   //       title: selectedMeetup.title,
-//   //       address: selectedMeetup.address,
-//   //       image: selectedMeetup.image,
-//   //       description: selectedMeetup.description,
-//   //     },
-//   //   },
-//   // };
-// }
+  return {
+    props: {
+      meetupData: {
+        id: meetupId,
+        title: "A First Meetup",
+        address: "Some address some city",
+        image:
+          "https://en.wikipedia.org/wiki/File:Monasterio_Khor_Virap,_Armenia,_2016-10-01,_DD_25.jpg",
+        description: "This is a first meetup!",
+      },
+    },
+  };
+}
 
 export default MeetupDetails;

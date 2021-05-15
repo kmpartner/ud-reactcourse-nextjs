@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import classes from "./MeetupDetail.module.css";
 
 function MeetupDetail(props) {
-  console.log("mettupDetail props", props);
+  // console.log("mettupDetail props", props);
   return (
     <section className={classes.detail}>
       <img src={props.image} alt={props.title} />
